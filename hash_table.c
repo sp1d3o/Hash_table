@@ -1,5 +1,15 @@
 #include "hash_table.h"
 
+table_t *ht_build()
+{
+    table_t *table = (table_t *)malloc(sizeof(table_t));
+
+    table->T_size = 0;
+    table->table_ptr = NULL;
+
+    return table;
+}
+
 int get_hash(void *key, table_t *table)
 {
     int res = 1;
@@ -17,7 +27,7 @@ void ht_init(table_t *table, size_t ht_size)
     table->table_ptr = (void *)malloc(table->T_size * sizeof(tab_node_t *));
 
     if(table->table_ptr == NULL) {
-        malloc_error(__func__);
+        ERR_EMPTY;
     }
 
     for(size_t i = 0; i < table->T_size; i++) {
@@ -53,7 +63,7 @@ void ht_insert(table_t *table, void *key, void *value)
 
     item = malloc(sizeof(tab_node_t));
     if(item == NULL) {
-        malloc_error(__func__ );
+        ERR_EMPTY;
     }
 
     strcpy(item->key, key);

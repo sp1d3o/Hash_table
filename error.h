@@ -16,22 +16,4 @@ typedef enum ERROR_CODES status_t;
 
 noreturn void malloc_error(const char* location);
 
-#define OK \
-    status == ERR_OK
-
-#define NOK \
-    status != ERR_OK
-
-#define new(type, var)                  \
-    type* var = malloc(sizeof(type));   \
-    if(var == NUL) {                    \
-        malloc_error(__func__)           \
-    }
-
-
-#define DEFAULT_NOT_IMPLEMENTED     \
-    default:                        \
-        NotImplementedError;        \
-    break
-
 #endif //HASH_TABLE_ERROR_H

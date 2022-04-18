@@ -7,10 +7,18 @@
 //custom headers
 #include "error.h"
 
+/*
+ * hashtable data structure type: contains pointer to memory and table size information
+ */
+
 typedef struct table_t {
     void **table_ptr;
     size_t T_size;
 } table_t;
+
+/*
+ * hashtable item type: contains key, value and pointer to the next item of same hash
+ */
 
 typedef struct tab_node_t {
     void *key;
@@ -18,16 +26,19 @@ typedef struct tab_node_t {
     struct tab_node_t *next;
 } tab_node_t;
 
-//generating hash function
+//creating a new empty hashtable with zero values
+table_t *ht_build();
+
+//generating hash function - generates integer from the string-type key
 int get_hash(void *key, table_t *table);
 
-//hashtable initializer
+//hashtable initializer - initialize a hashtable of given size
 void ht_init(table_t *table, size_t ht_size);
 
 //searching by a key - returns hashtable item with appropriate key
 tab_node_t *ht_search(table_t *table, void *key);
 
-//inserting a new item to the hashtable
+//inserting a new item to the hashtable - takes key and value pair
 void ht_insert(table_t *table, void *key, void *value);
 
 //get a value from node with appropriate key, if there is any
